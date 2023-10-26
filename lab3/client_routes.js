@@ -1,9 +1,10 @@
-let express = require("express");
-let server = express();
+const users = require("./data.json");
+const express = require("express");
+const router = express.Router();
+const fs = require("fs");
 const jsonParser = express.json();
-let users = require("./data.json");
 
-server.use((req, res, next) => {
+router.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Content-Type");
   res.header('Access-Control-Allow-Methods', 'GET, POST');
@@ -11,9 +12,7 @@ server.use((req, res, next) => {
 });
 
 
-server.post("/userModule/addUser", jsonParser, (req, res) => {
-
-
+router.post("/userModule/addUser", jsonParser, (req, res) => {
 
   const index = users.map((g)=>{
     //console.log(g.id)
@@ -21,22 +20,22 @@ server.post("/userModule/addUser", jsonParser, (req, res) => {
   }).indexOf(req.body.id);
 
   // console.log(req.body)
-  // console.log(index)
+  console.log(index)
 
   if(index===-1) {
-    res.send(true)
+    res.send({mes:true})
     users[users.length] = req.body
     //console.log(users)
 
   }else{
 
-    res.send(false);
+    res.send({mes:false});
 
   }
 
 })
-server.get("/userModule/getUsers", (req, res) => {
+router.get("/userModule/getUsers", (req, res) => {
 
   res.send(JSON.stringify({test: "abc"}));
 });
-server.listen(3000);
+module.exports = router;

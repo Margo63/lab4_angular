@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../public/styles/style.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+</head>
+<body>
+
+
+
+
+<div id="conteiner">
+    <%list.forEach((elem)=>{ %>
+    <div class = "card">
+        <img src=<%=elem.img%> class="card_elem">
+        <p class="card_elem"><%=elem.name%></p>
+
+        <select id=<%=elem.id%> class="select_role" >
+            <option>администратор </option>
+            <option>пользователь  </option>
+            <option>никто</option>
+        </select>
+
+        <select id=<%=elem.id%> class="select_state">
+            <option>неподтвержденный пользователь</option>
+            <option>активный</option>
+            <option>заблокированный</option>
+        </select>
+
+        <div id=<%=elem.id%> class="but">
+            <p class="card_elem">Друзья</p>
+        </div>
+    </div>
+
+
+
+
+    <%});%>
+
+</div>
+
+
+
+<script src = "/../public/ajax.js"></script>
+
+</body>
+</html>

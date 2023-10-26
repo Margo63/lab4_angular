@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <link rel="stylesheet" href="/../public/styles/style.css" type="text/css">
+<!--    <link rel="stylesheet" href="../public/style_book.css" type="text/css">-->
+<!--    <link rel="stylesheet" href=-->
+<!--    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">-->
+
+</head>
+<body>
+
+<div id="userFriends">
+    Пользователь:<br>
+    <div id="userInfo">
+
+        Имя: <%=element.name%> <br>
+        E-mail: <%=element.email%> <br>
+        BirthDay: <%=element.BD%> <br>
+        Роль: <%=element.role%> <br>
+        Статус: <%=element.state%> <br>
+        Новости:<br> <%element.news.forEach((news)=>{%>
+                    <%=news%><br>
+                <%})%>
+    </div>
+    Список друзей:<br>
+    <%friendList.forEach((elem)=>{ %>
+        <div class="friendCard">
+            <div id=<%=elem.id%> class="news">
+                <%=elem.name%>
+            </div>
+        </div>
+
+    <%});%>
+</div>
+
+<script src = "/../public/user.js"></script>
+</body>
+</html>

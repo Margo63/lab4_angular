@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+    <link rel="stylesheet" href="/../public/styles/style.css" type="text/css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <!--    <link rel="stylesheet" href="../public/style_book.css" type="text/css">-->
+    <!--    <link rel="stylesheet" href=-->
+    <!--    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">-->
+
+</head>
+<body>
+
+<div id="userFriends">
+    Пользователь:
+    <%=element.name%> <br><br>
+    Список Новостей:<br>
+
+
+    <div id="accordion">
+        <%newsList.forEach((elem)=>{
+             %>
+        <h3><%=elem.name%></h3>
+        <div>
+            <p>
+                <%elem.news.forEach((news)=>{%>
+                <%=news%><br>
+
+                <%})%>
+            </p>
+        </div>
+
+
+
+        <%});%>
+    </div>
+
+</div>
+<script src = "/../public/news.js"></script>
+</body>
+</html>

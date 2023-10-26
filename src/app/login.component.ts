@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {LoginForm} from "./loginFrom";
+
 
 @Component({
   selector: 'login-form',
@@ -10,25 +10,24 @@ import {LoginForm} from "./loginFrom";
     <div class="container">
       <form>
         <div class="form-group">
-          <label for="myid">ID</label>
-          <input #edit1 [value]="id" type="text">
+          <label>Nickname</label>
+          <input #editID [value]="id" type="text">
         </div>
         <div class="form-group">
-          <label
-            for="title">Название</label>
-          <input #edit2 [value]="name" type="text">
+          <label>Birth Day</label>
+          <input #editBD [value]="bd" type="text">
         </div>
       </form>
-      <button (click)=onLoginButtonClicked(edit1.value,edit2.value)>Login</button>
+      <button (click)=onLoginButtonClicked(editID.value,editBD.value)>Login</button>
     </div>`,
   styles: [`
 
   `]
 })
 export class loginComponent {
-  item = new LoginForm(1, 'ABC');
+
   id = ""
-  name = ""
+  bd = ""
 
   constructor(private http: HttpClient,
               private router: Router) {
