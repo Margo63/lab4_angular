@@ -67,7 +67,7 @@ export class RegisterFormComponent {
           alert("nickname already exists")
         else if(value.mes == true){
 
-          this.router.navigateByUrl('/news');
+          //this.router.navigateByUrl('/news');
         }else{
           alert("noooo")
         }

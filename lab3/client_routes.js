@@ -14,7 +14,7 @@ router.use((req, res, next) => {
 
 router.post("/userModule/addUser", jsonParser, (req, res) => {
 
-  const index = users.map((g)=>{
+  const index = users.map((g) => {
     //console.log(g.id)
     return g.id;
   }).indexOf(req.body.id);
@@ -22,20 +22,46 @@ router.post("/userModule/addUser", jsonParser, (req, res) => {
   // console.log(req.body)
   console.log(index)
 
-  if(index===-1) {
-    res.send({mes:true})
+  if (index === -1) {
+    res.send({mes: true})
     users[users.length] = req.body
     //console.log(users)
 
-  }else{
 
-    res.send({mes:false});
+  } else {
+
+    res.send({mes: false});
 
   }
 
 })
-router.get("/userModule/getUsers", (req, res) => {
+router.get("/userModule/login", (req, res) => {
+  const index = users.map((g) => {
+    //console.log(g.id)
+    return g.id;
+  }).indexOf(req.query.id);
+  console.log(index, users[index])
 
-  res.send(JSON.stringify({test: "abc"}));
+  if (index !== -1 && req.query.bd === users[index].BD) {
+    res.send({mes: "success"})
+  } else {
+    res.send({mes: "fail"})
+  }
+
 });
+
+router.get("/userModule/getUserInfo", (req, res) => {
+  const index = users.map((g) => {
+    return g.id;
+  }).indexOf(req.query.id);
+
+  const newsList = users.filter((g)=>{
+    if(users[index].friends.includes(g.id)) return true;
+  });
+
+  console.log("inGetUser")
+  res.send({userInfo:users[index], userFriendsInfo: newsList })
+
+});
+
 module.exports = router;
