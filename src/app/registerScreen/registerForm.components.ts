@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {DataService} from "../service/data.service";
 
 @Component({
   selector: 'register-form',
@@ -43,11 +44,13 @@ export class RegisterFormComponent {
   img=""
 
   constructor(private http: HttpClient,
-              private router: Router) {
+              private router: Router, private dataService: DataService) {
   }
 
   onRegisterButtonClicked(editID: string, editName: string, editBD:string,
                           editEmail:string, editImage: string) {
+
+    alert(this.dataService.getData())
 
     const headers = new HttpHeaders();
     const body = {

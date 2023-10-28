@@ -4,14 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { registerComponent } from './register.component';
-import { newsComponent } from './news.component';
+import { registerComponent } from './registerScreen/register.component';
+import { newsComponent } from './newsScreen/news.component';
 import { addNewsComponent } from './addNews.component';
-import {RegisterFormComponent} from "./refisterFrom.components";
+import {RegisterFormComponent} from "./registerScreen/registerForm.components";
 import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
-import {loginComponent} from "./login.component";
+import {loginComponent} from "./registerScreen/login.component";
+import {userNewsComponent} from "./newsScreen/usernews.component";
+import {DataService} from "./service/data.service";
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import {loginComponent} from "./login.component";
     newsComponent,
     addNewsComponent,
     RegisterFormComponent,
-    loginComponent
+    loginComponent,
+    userNewsComponent
 
   ],
   imports: [
@@ -30,7 +33,7 @@ import {loginComponent} from "./login.component";
     HttpClientModule,
 
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

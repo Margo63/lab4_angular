@@ -14,11 +14,26 @@
     ],
     "messages": [
       {
+        "flag": false,
         "from": "serBredfort",
         "message": [
-          "",
-          ""
+          {
+            "time": "1",
+            "text": "aaa"
+          },
+          {
+            "time": "3",
+            "text": "CCC"
+          }
         ]
+      },
+      {
+        "flag": true,
+        "to" : "serBredfort",
+        "message": [{
+          "time": "2",
+          "text": "BBB"
+        }]
       }
     ],
     "friends": [

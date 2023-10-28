@@ -2,6 +2,7 @@ import {Component} from "@angular/core";
 
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {DataService} from "../service/data.service";
 
 
 @Component({
@@ -29,26 +30,10 @@ export class loginComponent {
   id = ""
   bd = ""
 
-  constructor(private http: HttpClient,
-              private router: Router) {
-  }
+  constructor(private dataService: DataService) {}
 
   onLoginButtonClicked(editId: string, editBD: string) {
-
-    const params = new HttpParams()
-      .set('id', editId)
-      .set('bd', editBD);
-    this.http.get<any>("http://localhost:3000/userModule/login", {params})
-      .subscribe(value => {
-        if(value.mes === "success"){
-          this.router.navigateByUrl('/news/'+editId);
-        }else{
-          alert("check nickname or bd")
-        }
-
-
-      }, error => {
-        console.log(error)
-      })
+    this.dataService.loginUser(editId,editBD)
   }
+
 }
