@@ -1,6 +1,3 @@
-import {MessageForm} from "./messagesForm";
-
-
 export class UserForm{
   constructor(
     public id: string,
@@ -10,7 +7,6 @@ export class UserForm{
     public news: string[],
     public img: string,
     public role: string,
-    public state: string,
-    public messages: MessageForm[]
+    public state: string
   ) {}
 }

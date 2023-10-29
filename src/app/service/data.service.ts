@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 
 @Injectable()
 export class DataService {
+
   constructor(private http: HttpClient, private router: Router) {
   }
 
@@ -26,7 +27,9 @@ export class DataService {
     this.http.get<any>("http://localhost:4000/userModule/login", {params})
       .subscribe(value => {
         if (value.mes === "success") {
-          this.router.navigateByUrl('/news/' + id);
+          this.router.navigateByUrl('/news/' + id).then(() => {
+            window.location.reload();
+          });
         } else {
           alert("check nickname or bd")
         }
@@ -59,7 +62,9 @@ export class DataService {
         if (value.mes == false)
           alert("nickname already exists")
         else if (value.mes == true) {
-          this.router.navigateByUrl('/news/' + editID);
+          this.router.navigateByUrl('/news/' + editID).then(() => {
+            window.location.reload();
+          });
         } else {
           alert("noooo")
         }

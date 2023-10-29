@@ -1,4 +1,6 @@
 const users = require("./data.json");
+const messages = require("./messages.json");
+
 const express = require("express");
 const router = express.Router();
 const fs = require("fs");
@@ -68,7 +70,7 @@ router.get("/userModule/getUserInfo", (req, res) => {
     return g.id;
   }).indexOf(req.query.id);
 
-console.log(index,)
+  console.log(index,)
   const newsList = users.filter((g) => {
     if (users[index].friends.includes(g.id)) return true;
   });
@@ -78,4 +80,52 @@ console.log(index,)
 
 });
 
+
+router.post("/userModule/addNews", jsonParser, (req, res) => {
+
+  const index = users.map((g) => {
+    //console.log(g.id)
+    return g.id;
+  }).indexOf(req.body.id);
+
+  console.log(req.body);
+  if (index !== -1) {
+    users[index].news.push(req.body.data)
+    fs.writeFile('data.json', JSON.stringify(users), (err) => {
+      if (err) throw err;
+      console.log('The file has been saved!');
+    });
+    res.send({mes: true})
+  } else {
+    res.send({mes: false});
+  }
+})
+
+router.get("/userModule/getMessages", (req, res) => {
+  const mesList = messages.filter((g) => {
+    if ((req.query.senderId === g.from && req.query.recipientId === g.to)||
+        (req.query.recipientId === g.from && req.query.senderId  === g.to)) return true;
+  });
+
+  console.log(messages)
+  console.log(mesList)
+  res.send(mesList)
+
+});
+
+router.post("/userModule/addMessages", jsonParser,(req, res) => {
+
+  messages[messages.length]=req.body
+  fs.writeFile('messages.json', JSON.stringify(messages), (err) => {
+    if (err){
+      throw err;
+      res.send(false)
+    }else{
+      console.log('The file has been saved!');
+      res.send(true)
+    }
+  });
+
+
+});
 module.exports = router;

@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {loginComponent} from "./registerScreen/login.component";
 import {userNewsComponent} from "./newsScreen/usernews.component";
 import {DataService} from "./service/data.service";
+import {SocketioService} from "./socket-io.service";
+import {messageComponent} from "./message/message.components";
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import {DataService} from "./service/data.service";
     addNewsComponent,
     RegisterFormComponent,
     loginComponent,
-    userNewsComponent
+    userNewsComponent,
+    messageComponent
 
   ],
   imports: [
@@ -33,7 +36,7 @@ import {DataService} from "./service/data.service";
     HttpClientModule,
 
   ],
-  providers: [DataService],
+  providers: [DataService,SocketioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

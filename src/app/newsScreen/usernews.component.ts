@@ -1,12 +1,13 @@
 import {Component, Input} from '@angular/core';
 import {UserForm} from "./userFrom";
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 
 @Component({
   selector: 'user-news',
   template: `
-    <h3>{{elem.name}}</h3>
+    <h3 >{{elem.name}}</h3>
     <div *ngFor='let friendNews of elem.news'>
       {{friendNews}}
     </div>
