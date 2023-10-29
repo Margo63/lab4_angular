@@ -30,7 +30,7 @@ export class newsComponent {
 
   ngOnInit(): void {
     const params = new HttpParams().set('id', this.myid);
-    this.http.get<any>("http://localhost:3000/userModule/getUserInfo", {params})
+    this.http.get<any>("http://localhost:4000/userModule/getUserInfo", {params})
       .subscribe(value => {
         this.listUserNews = value.userInfo.news
         this.listUserFriends = value.userFriendsInfo

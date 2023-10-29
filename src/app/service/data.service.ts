@@ -23,7 +23,7 @@ export class DataService {
     const params = new HttpParams()
       .set('id', id)
       .set('bd', bd);
-    this.http.get<any>("http://localhost:3000/userModule/login", {params})
+    this.http.get<any>("http://localhost:4000/userModule/login", {params})
       .subscribe(value => {
         if (value.mes === "success") {
           this.router.navigateByUrl('/news/' + id);
@@ -53,7 +53,7 @@ export class DataService {
     }
     //alert(JSON.stringify(headers))
 
-    this.http.post<any>("http://localhost:3000/userModule/addUser", body, {headers: headers})
+    this.http.post<any>("http://localhost:4000/userModule/addUser", body, {headers: headers})
       .subscribe(value => {
 
         if (value.mes == false)
