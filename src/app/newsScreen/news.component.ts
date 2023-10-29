@@ -47,7 +47,7 @@ export class newsComponent {
 
 
   friendClicked(id: string){
-    alert(this.myid)
+    //alert(this.myid)
     this.router.navigateByUrl('/message/' + this.myid +"/"+ id).then(() => {
       window.location.reload();
     });
@@ -95,7 +95,9 @@ export class newsComponent {
   }
 
   addNews() {
-    this.router.navigateByUrl('/addNews/' + this.myid);
+    this.router.navigateByUrl('/addNews/' + this.myid).then(() => {
+      window.location.reload();
+    });
   }
 
   ngOnDestroy() {

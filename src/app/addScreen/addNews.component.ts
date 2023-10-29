@@ -38,12 +38,12 @@ export class addNewsComponent {
       id: this.route.snapshot.params["id"],
       data: newData
     }
-    alert(newData);
+    //alert(newData);
     this.http.post<any>("http://localhost:4000/userModule/addNews", body, {headers: headers})
       .subscribe(value => {
 
         if (value.mes === true){
-          alert("posted")
+         // alert("posted")
           this.socketService.emitToServer("newNews", body);
         }
 
