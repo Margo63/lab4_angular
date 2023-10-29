@@ -29,7 +29,7 @@ export class newsComponent {
   userInfo: UserForm;
 
   data = ""
-  users: UserForm[]=[]
+  users: UserForm[]=[];
 
   isAdmin= "none"
   constructor(route: ActivatedRoute,
@@ -39,14 +39,10 @@ export class newsComponent {
 
     this.myid = route.snapshot.params["id"]
 
-    this.socketService.listenToServer("change").subscribe((change) => {
+    this.socketService.listenToServer("newNews").subscribe((change) => {
       this.onChange(change);
     })
 
-
-    this.socketService.listenToServer("create").subscribe((user) => {
-      this.onCreate(user);
-    })
   }
 
 
@@ -57,16 +53,12 @@ export class newsComponent {
     });
   }
 
-  onChange(change: UserForm) {
+  onChange(change: any) {
     console.log("onChange")
     const index = this.users.findIndex((user) => user.id === change.id);
-    this.users[index].name = change.name;
+    this.users[index].news.push(change.data);
   }
 
-  onCreate(user: UserForm) {
-    console.log("onCreate")
-    this.users.push(user);
-  }
 
 
 
@@ -74,17 +66,24 @@ export class newsComponent {
     const params = new HttpParams().set('id', this.myid);
     this.http.get<any>("http://localhost:4000/userModule/getUserInfo", {params})
       .subscribe(value => {
-        this.userInfo = value.userInfo
-        this.listUserNews = value.userInfo.news
-        this.listUserFriends = value.userFriendsInfo
+        this.userInfo = value.userInfo;
+
+        this.listUserNews = value.userInfo.news;
+        this.listUserFriends = value.userFriendsInfo;
+
+
         if(value.userInfo.role === "администратор"){
           this.isAdmin = "block"
         }
 
+        this.users.push(value.userInfo)
+        value.userFriendsInfo.forEach((el:UserForm)=>{
+          this.users.push(el)
+        })
+
       }, error => {
         console.log(error)
       })
-
 
   }
 

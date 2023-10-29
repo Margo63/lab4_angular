@@ -12,18 +12,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 @Component({
   selector: 'app-root',
   template: `
-    <h1 style="text-align: center;"> Websocket Demo </h1>
-    <div class="center">
-      <input [(ngModel)]="data" type="text" />
-      <button class="button" (click)="createUser (data)"> Create </button>
-    </div>
 
-    <div class="center" *ngFor="let user of users">
-      <input [(ngModel)]= "user.name" />
-      <button class="button update" (click)="updateUser(user.name, user.id)"> Update </button>
-    </div>
-
-    <div class="form-group">
+    <div>
       <label>New news</label>
       <input #editData [value]="newData" type="text">
     </div>
@@ -65,18 +55,18 @@ export class addNewsComponent {
   }
 
 
-  createUser(label: string): void {
-    console.log("createUser")
-    const user:UserForm = new UserForm(Date.now().toString(), label, "", "", [], "", "", "");
-    this.data = ""
-    this.socketService.emitToServer("create", user);
-    console.log("createUser2")
-  }
-
-  updateUser(label: string, id: string): void {
-    const user:UserForm = new UserForm(id, label, "", "", [], "", "", "")
-    this.socketService.emitToServer("change", user)
-  }
+  // createUser(label: string): void {
+  //   console.log("createUser")
+  //   const user:UserForm = new UserForm(Date.now().toString(), label, "", "", [], "", "", "");
+  //   this.data = ""
+  //   this.socketService.emitToServer("create", user);
+  //   console.log("createUser2")
+  // }
+  //
+  // updateUser(label: string, id: string): void {
+  //   const user:UserForm = new UserForm(id, label, "", "", [], "", "", "")
+  //   this.socketService.emitToServer("change", user)
+  // }
 
 
 }

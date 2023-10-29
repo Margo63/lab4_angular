@@ -70,12 +70,12 @@ router.get("/userModule/getUserInfo", (req, res) => {
     return g.id;
   }).indexOf(req.query.id);
 
-  console.log(index,)
+
   const newsList = users.filter((g) => {
     if (users[index].friends.includes(g.id)) return true;
   });
 
-  console.log("inGetUser")
+  console.log(users[index],newsList)
   res.send({userInfo: users[index], userFriendsInfo: newsList})
 
 });
