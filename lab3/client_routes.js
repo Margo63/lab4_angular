@@ -50,6 +50,7 @@ router.post("/userModule/addUser", jsonParser, (req, res) => {
   }
 
 })
+
 router.get("/userModule/login", (req, res) => {
   const index = users.map((g) => {
     //console.log(g.id)

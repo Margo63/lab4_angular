@@ -79,8 +79,8 @@ export class messageComponent {
     const body = {
       from: this.senderId,
       to: this.recipientId,
-      time: (new Date()).toLocaleDateString(),
-      date:(new Date()).toLocaleTimeString(),
+      time: (new Date()).toLocaleTimeString(),
+      date:(new Date()).toLocaleDateString(),
       message: newData
     }
     //alert(body);
