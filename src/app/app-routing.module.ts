@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {registerComponent} from "./registerScreen/register.component";
 import {newsComponent} from "./newsScreen/news.component";
-import {addNewsComponent} from "./addNews.component";
+import {addNewsComponent} from "./addScreen/addNews.component";
 
 const routes: Routes =  [
   { path: 'register', component: registerComponent },

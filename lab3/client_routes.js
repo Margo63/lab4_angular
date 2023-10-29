@@ -3,6 +3,14 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs");
 const jsonParser = express.json();
+const cors = require('cors')
+const corsOptions = {
+  'credentials': true,
+  'origin': true,
+  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  'allowedHeaders': 'Authorization,X-Requested-With,X-HTTP-Method-Override,Content-Type,Cache-Control,Accept',
+}
+router.use(cors(corsOptions))
 
 router.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -23,10 +31,15 @@ router.post("/userModule/addUser", jsonParser, (req, res) => {
   console.log(index)
 
   if (index === -1) {
-    res.send({mes: true})
     users[users.length] = req.body
-    //console.log(users)
 
+    fs.writeFile('data.json', JSON.stringify(users), (err) => {
+      if (err) throw err;
+      console.log('The file has been saved!');
+    });
+    res.send({mes: true})
+
+    //console.log(users)
 
   } else {
 
@@ -55,12 +68,13 @@ router.get("/userModule/getUserInfo", (req, res) => {
     return g.id;
   }).indexOf(req.query.id);
 
-  const newsList = users.filter((g)=>{
-    if(users[index].friends.includes(g.id)) return true;
+console.log(index,)
+  const newsList = users.filter((g) => {
+    if (users[index].friends.includes(g.id)) return true;
   });
 
   console.log("inGetUser")
-  res.send({userInfo:users[index], userFriendsInfo: newsList })
+  res.send({userInfo: users[index], userFriendsInfo: newsList})
 
 });
 

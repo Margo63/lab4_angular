@@ -49,34 +49,10 @@ export class RegisterFormComponent {
 
   onRegisterButtonClicked(editID: string, editName: string, editBD:string,
                           editEmail:string, editImage: string) {
-
-    alert(this.dataService.getData())
-
-    const headers = new HttpHeaders();
-    const body = {
-      id: editID,
-      name: editName,
-      BD: editBD,
-      email:editEmail,
-      img: editImage
-
-    }
-    alert(JSON.stringify(headers))
-
-    this.http.post<any>("http://localhost:3000/userModule/addUser", body, {headers: headers})
-      .subscribe(value => {
-
-        if (value.mes == false)
-          alert("nickname already exists")
-        else if(value.mes == true){
-
-          //this.router.navigateByUrl('/news');
-        }else{
-          alert("noooo")
-        }
-
-      }, error => {
-        console.log(error)
-      })
+    this.dataService.registerUser(editID, editName, editBD,editEmail, editImage);
   }
+
+   // alert(this.dataService.getData())
+
+
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {UserForm} from "./newsScreen/userFrom";
 
 
 @Component({
@@ -8,4 +9,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'lab4_angular';
+
+
 }

@@ -29,11 +29,13 @@
       },
       {
         "flag": true,
-        "to" : "serBredfort",
-        "message": [{
-          "time": "2",
-          "text": "BBB"
-        }]
+        "to": "serBredfort",
+        "message": [
+          {
+            "time": "2",
+            "text": "BBB"
+          }
+        ]
       }
     ],
     "friends": [
@@ -92,5 +94,17 @@
     "friends": [
       "OfChen"
     ]
+  },
+  {
+    "id": "dog",
+    "name": "dfg",
+    "BD": "dfg",
+    "email": "dfg",
+    "img": "dog",
+    "role": "пользователь",
+    "state": "неподтвержденный пользователь",
+    "news": [],
+    "messages": [],
+    "friends": []
   }
 ]

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 
 import { registerComponent } from './registerScreen/register.component';
 import { newsComponent } from './newsScreen/news.component';
-import { addNewsComponent } from './addNews.component';
+import { addNewsComponent } from './addScreen/addNews.component';
 import {RegisterFormComponent} from "./registerScreen/registerForm.components";
 import { FormsModule } from '@angular/forms';
 

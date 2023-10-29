@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Router} from "@angular/router";
 
 @Injectable()
@@ -31,9 +31,43 @@ export class DataService {
           alert("check nickname or bd")
         }
 
+      }, error => {
+        console.log(error)
+      })
+  }
+
+  registerUser(editID: string, editName: string, editBD: string, editEmail: string, editImage: string) {
+    const headers = new HttpHeaders();
+    const body = {
+      id: editID,
+      name: editName,
+      BD: editBD,
+      email: editEmail,
+      img: editImage,
+      "role": "пользователь",
+      "state": "неподтвержденный пользователь",
+      "news": [],
+      "messages": [ ],
+      "friends":[]
+
+    }
+    //alert(JSON.stringify(headers))
+
+    this.http.post<any>("http://localhost:3000/userModule/addUser", body, {headers: headers})
+      .subscribe(value => {
+
+        if (value.mes == false)
+          alert("nickname already exists")
+        else if (value.mes == true) {
+          this.router.navigateByUrl('/news/' + editID);
+        } else {
+          alert("noooo")
+        }
 
       }, error => {
         console.log(error)
       })
   }
+
+
 }
