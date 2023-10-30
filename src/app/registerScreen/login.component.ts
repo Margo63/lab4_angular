@@ -22,7 +22,19 @@ import {DataService} from "../service/data.service";
       <button (click)=onLoginButtonClicked(editID.value,editBD.value)>Login</button>
     </div>`,
   styles: [`
-
+    label{
+      margin-right: 10px;
+    }
+    input{
+      margin-top: 15px;
+      font-size: 25px;
+    }
+    button{
+      margin-top: 15px;
+      background-color: #FFFFFF;
+      font-size: 30px;
+      border-radius: 10px;
+    }
   `]
 })
 export class loginComponent {

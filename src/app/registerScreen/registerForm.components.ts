@@ -33,7 +33,19 @@ import {DataService} from "../service/data.service";
       >Register</button>
     </div>`,
   styles: [`
-
+    label{
+      margin-right: 10px;
+    }
+    input{
+      margin-top: 15px;
+      font-size: 25px;
+    }
+    button{
+      margin-top: 15px;
+      background-color: #FFFFFF;
+      font-size: 30px;
+      border-radius: 10px;
+    }
   `]
 })
 export class RegisterFormComponent {

@@ -50,7 +50,6 @@ export class DataService {
       "role": "пользователь",
       "state": "неподтвержденный пользователь",
       "news": [],
-      "messages": [ ],
       "friends":[]
 
     }
