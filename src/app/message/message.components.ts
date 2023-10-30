@@ -12,34 +12,62 @@ import {MessageForm} from "./messagesForm";
 @Component({
   selector: 'app-root',
   template: `
-    <h1 style="text-align: center;"> Sender {{senderId}} </h1>
-    <h3 style="text-align: center;"> Recipient {{recipientId}} </h3>
-    <div class="center" *ngFor="let mes of messages">
-        <div>
-            from: {{mes.from}}<br>
-            to: {{mes.to}}<br>
-            time: {{mes.time}}<br>
+    <body>
+      <h1 style="text-align: center;"> Sender nickname: {{senderId}} </h1>
+      <h2 style="text-align: center;"> Recipient nickname: {{recipientId}} </h2>
+      <div style=" overflow: auto; height: 500px">
+        <div *ngFor="let mes of messages"  >
+          <div style="background-color: #FF4B3A; border-radius: 10px; color: #FFFFFF; padding: 10px; font-size: 22px;">
+            <div style="color: #ffc7c3;">
+              from: {{mes.from}}
+              to: {{mes.to}}
+              date: {{mes.date}}
+              time: {{mes.time}}
+            </div>
             mes: {{mes.message}}
+          </div>
         </div>
+      </div>
+
+
+
+
+    </body>
+    <footer>
+      <div style="background-color: #f8774a; padding: 10px; border-radius: 10px; ">
+      <input [(ngModel)]="data" type="text"/>
+      <button class="button" (click)="postMes(data)"> Send</button>
     </div>
 
-    <div class="center">
-      <input [(ngModel)]="data" type="text" />
-      <button class="button" (click)="postMes(data)"> Send </button>
-    </div>
-
+    </footer>
 
   `,
+  styles:[`
+    div{
+      margin: 10px;
+    }
+    input{
+      font-size: 22px;
+      border-radius: 10px;
+      padding: 3px;
+    }
+    button{
+      font-size: 22px;
+      margin-left: 10px;
+      background-color: #FFFFFF;
+      border-radius: 10px;
+      padding: 3px;
+    }
+  `]
 })
 export class messageComponent {
 
 
-
-  senderId=""
-  recipientId=""
+  senderId = ""
+  recipientId = ""
 
   messages: MessageForm[]
-  newData=""
+  newData = ""
   data = ""
 
   constructor(private route: ActivatedRoute,
@@ -53,9 +81,7 @@ export class messageComponent {
     // })
 
 
-
   }
-
 
 
   ngOnInit(): void {
@@ -63,12 +89,12 @@ export class messageComponent {
       this.onCreate(user);
     })
 
-    const params = new HttpParams().set('senderId', this.senderId).set("recipientId",this.recipientId);
+    const params = new HttpParams().set('senderId', this.senderId).set("recipientId", this.recipientId);
 
     this.http.get<any>("http://localhost:4000/userModule/getMessages", {params})
       .subscribe(value => {
         this.messages = value
-       // alert(this.messages)
+        // alert(this.messages)
       }, error => {
         console.log(error)
       })
@@ -80,13 +106,13 @@ export class messageComponent {
       from: this.senderId,
       to: this.recipientId,
       time: (new Date()).toLocaleTimeString(),
-      date:(new Date()).toLocaleDateString(),
+      date: (new Date()).toLocaleDateString(),
       message: newData
     }
     //alert(body);
     this.http.post<any>("http://localhost:4000/userModule/addMessages", body, {headers: headers})
       .subscribe(value => {
-          this.createMes(body)
+        this.createMes(body)
       }, error => {
         console.log(error)
       })
@@ -103,10 +129,8 @@ export class messageComponent {
 
     this.socketService.emitToServer("create", mes);
     console.log("createUser2")
-    this.data=""
+    this.data = ""
   }
-
-
 
 
 }

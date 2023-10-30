@@ -1,26 +1,64 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {UserForm} from "./userFrom";
 import {SocketioService} from "../socket-io.service";
 
 
 @Component({
   selector: 'app-root',
-  template: `<h1>{{myid}}</h1>
-  <div *ngFor='let item of listUserNews'>
-    {{item}}
-  </div>
+  template: `
+    <body>
+      <h1>{{myid}}</h1>
+      <img src="{{userInfo.img}}" style="height: 100px; width: 100px; border-radius: 50px">
+      <div
+        style="margin: 10px; color: #FFFFFF; background-color: #FF4B3A; border-radius: 10px; padding: 10px; font-size: 20px">
+        <div *ngFor='let item of listUserNews'>
+          {{item}}
+        </div>
+      </div>
 
+      <div style="display: flex; flex-direction: row">
+        <button (click)=addNews()>AddNews</button>
+        <button (click)=goToAdmin() [ngStyle]="{'display': isAdmin}">Admin</button>
+      </div>
 
-  <button (click)=addNews()>AddNews</button>
-  <button (click)=goToAdmin() [ngStyle]="{'display': isAdmin}">Admin</button>
-  <h1>Friends News</h1>
-  <div *ngFor='let item of listUserFriends'>
-    <user-news [elem]="item" (click)="friendClicked(item.id)"></user-news>
-  </div>
+      <div>
+        <label>friend nickname</label>
+        <input #editFriend [value]="friend" type="text">
+        <button (click)=addFriend(editFriend.value)>add friend</button>
+        <button (click)=delFriend(editFriend.value)>del friend</button>
+      </div>
+
+      <div>
+        <label>image url</label>
+        <input #editImage [value]="img" type="text">
+        <button (click)=changeImg(editImage.value)>change img</button>
+        <button (click)=delImg()>del img</button>
+      </div>
+
+      <h1>Friends News</h1>
+      <div style="margin: 10px">
+        <div *ngFor='let item of listUserFriends'>
+          <user-news [elem]="item" (click)="friendClicked(item.id)"></user-news>
+        </div>
+      </div>
+    </body>
 
   `,
+  styles: [`
+    button {
+      background-color: #f8774a;
+      color: #FFFFFF;
+      font-size: 25px;
+      border-radius: 10px;
+      padding: 10px;
+      margin: 10px;
+    }
+    body{
+      padding: 5px;
+    }
+  `]
 })
 export class newsComponent {
   myid: string;
@@ -29,9 +67,13 @@ export class newsComponent {
   userInfo: UserForm;
 
   data = ""
-  users: UserForm[]=[];
+  users: UserForm[] = [];
 
-  isAdmin= "none"
+  isAdmin = "none"
+
+  friend = ""
+  img=""
+
   constructor(route: ActivatedRoute,
               private http: HttpClient,
               private router: Router,
@@ -46,9 +88,9 @@ export class newsComponent {
   }
 
 
-  friendClicked(id: string){
+  friendClicked(id: string) {
     //alert(this.myid)
-    this.router.navigateByUrl('/message/' + this.myid +"/"+ id).then(() => {
+    this.router.navigateByUrl('/message/' + this.myid + "/" + id).then(() => {
       window.location.reload();
     });
   }
@@ -58,8 +100,6 @@ export class newsComponent {
     const index = this.users.findIndex((user) => user.id === change.id);
     this.users[index].news.push(change.data);
   }
-
-
 
 
   ngOnInit(): void {
@@ -72,12 +112,12 @@ export class newsComponent {
         this.listUserFriends = value.userFriendsInfo;
 
 
-        if(value.userInfo.role === "администратор"){
+        if (value.userInfo.role === "администратор") {
           this.isAdmin = "block"
         }
 
         this.users.push(value.userInfo)
-        value.userFriendsInfo.forEach((el:UserForm)=>{
+        value.userFriendsInfo.forEach((el: UserForm) => {
           this.users.push(el)
         })
 
@@ -102,5 +142,67 @@ export class newsComponent {
 
   ngOnDestroy() {
     this.socketService.disconnect();
+  }
+
+  addFriend(value: string) {
+    const body = {
+      id: this.userInfo.id,
+      friend: value
+    }
+
+    this.http.post<any>("http://localhost:4000/userModule/addFriend", body)
+      .subscribe(value => {
+        //alert(value)
+
+      }, error => {
+        console.log(error)
+      })
+  }
+
+  delFriend(value: string) {
+    const body = {
+      id: this.userInfo.id,
+      friend: value
+    }
+
+    this.http.post<any>("http://localhost:4000/userModule/delFriend", body)
+      .subscribe(value => {
+        //alert(value)
+
+      }, error => {
+        console.log(error)
+      })
+  }
+
+  changeImg(value: string) {
+    alert(value)
+    const body = {
+      id: this.userInfo.id,
+      img: value
+    }
+
+    this.http.post<any>("http://localhost:4000/userModule/changeImg", body)
+      .subscribe(value => {
+        //alert(value)
+
+      }, error => {
+        console.log(error)
+      })
+  }
+
+
+
+  delImg() {
+    const body = {
+      id: this.userInfo.id
+    }
+
+    this.http.post<any>("http://localhost:4000/userModule/deleteImg", body)
+      .subscribe(value => {
+          //alert(value)
+
+      }, error => {
+        console.log(error)
+      })
   }
 }

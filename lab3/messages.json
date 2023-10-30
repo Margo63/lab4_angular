@@ -1,16 +1,1 @@
-[
-  {
-    "from": "OfNolan",
-    "to": "OfChen",
-    "time": "29.10.2023",
-    "date": "18:35:57",
-    "message": "sdf"
-  },
-  {
-    "from": "serBredfort",
-    "to": "OfChen",
-    "time": "29.10.2023",
-    "date": "18:50:01",
-    "message": "dfg"
-  }
-]
+[{"from":"OfNolan","to":"OfChen","time":"29.10.2023","date":"18:35:57","message":"sdf"},{"from":"serBredfort","to":"OfChen","time":"29.10.2023","date":"18:50:01","message":"dfg"},{"from":"OfChen","to":"OfNolan","time":"10:14:09","date":"30.10.2023","message":"hi"},{"from":"OfChen","to":"OfNolan","time":"10:18:54","date":"30.10.2023","message":"sdf"},{"from":"OfChen","to":"OfNolan","time":"10:18:56","date":"30.10.2023","message":"pdf"},{"from":"OfChen","to":"OfNolan","time":"10:18:58","date":"30.10.2023","message":"pdf"},{"from":"OfChen","to":"OfNolan","time":"10:19:01","date":"30.10.2023","message":"pdf"},{"from":"OfChen","to":"OfNolan","time":"10:21:02","date":"30.10.2023","message":"qqq"},{"from":"OfChen","to":"OfNolan","time":"10:23:58","date":"30.10.2023","message":""},{"from":"OfChen","to":"OfNolan","time":"10:24:01","date":"30.10.2023","message":"dfg"},{"from":"OfChen","to":"OfNolan","time":"12:00:25","date":"30.10.2023","message":"hi"}]

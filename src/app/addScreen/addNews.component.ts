@@ -13,13 +13,32 @@ import {ActivatedRoute, Router} from "@angular/router";
   selector: 'app-root',
   template: `
 
-    <div>
-      <label>New news</label>
+    <div style="background-color: #FF4B3A; padding: 20px; border-radius: 10px;">
+      <label style="color: #FFFFFF">New news</label>
       <input #editData [value]="newData" type="text">
+      <button (click)=postNews(editData.value)>Post</button>
     </div>
-    <button (click)=postNews(editData.value)>Post</button>
-
   `,
+  styles:[`
+    div{
+      margin-top: 300px;
+      display: flex;
+      justify-content: center;
+      font-size: 30px;
+
+    }
+    input{
+      font-size: 30px;
+      margin-left: 20px;
+    }
+    button{
+      font-size: 30px;
+      padding: 5px;
+      border-radius: 10px;
+      background-color: #f8774a;
+      color: #FFFFFF;
+    }
+  `]
 })
 
 export class addNewsComponent {

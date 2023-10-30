@@ -76,7 +76,7 @@ router.get("/userModule/getUserInfo", (req, res) => {
     if (users[index].friends.includes(g.id)) return true;
   });
 
-  console.log(users[index],newsList)
+  console.log(users[index], newsList)
   res.send({userInfo: users[index], userFriendsInfo: newsList})
 
 });
@@ -104,8 +104,8 @@ router.post("/userModule/addNews", jsonParser, (req, res) => {
 
 router.get("/userModule/getMessages", (req, res) => {
   const mesList = messages.filter((g) => {
-    if ((req.query.senderId === g.from && req.query.recipientId === g.to)||
-        (req.query.recipientId === g.from && req.query.senderId  === g.to)) return true;
+    if ((req.query.senderId === g.from && req.query.recipientId === g.to) ||
+      (req.query.recipientId === g.from && req.query.senderId === g.to)) return true;
   });
 
   console.log(messages)
@@ -114,19 +114,108 @@ router.get("/userModule/getMessages", (req, res) => {
 
 });
 
-router.post("/userModule/addMessages", jsonParser,(req, res) => {
+router.post("/userModule/addMessages", jsonParser, (req, res) => {
 
-  messages[messages.length]=req.body
+  messages[messages.length] = req.body
   fs.writeFile('messages.json', JSON.stringify(messages), (err) => {
-    if (err){
+    if (err) {
       throw err;
       res.send(false)
-    }else{
+    } else {
       console.log('The file has been saved!');
       res.send(true)
     }
   });
+});
 
+router.post("/userModule/changeImg", jsonParser, (req, res) => {
+  const index = users.map((g) => {
+    return g.id;
+  }).indexOf(req.body.id);
+
+  if (index !== -1) {
+    users[index].img = req.body.img;
+    fs.writeFile('data.json', JSON.stringify(users), (err) => {
+      if (err) {
+        throw err;
+        res.send(false)
+      } else {
+        console.log('The file has been saved!');
+        res.send(true)
+      }
+    });
+  } else {
+    res.send("not ok");
+  }
+});
+
+router.post("/userModule/deleteImg", jsonParser, (req, res) => {
+  const index = users.map((g) => {
+    return g.id;
+  }).indexOf(req.body.id);
+
+  if (index !== -1) {
+    users[index].img = "";
+    fs.writeFile('data.json', JSON.stringify(users), (err) => {
+      if (err) {
+        throw err;
+        res.send(false)
+      } else {
+        console.log('The file has been saved!');
+        res.send(true)
+      }
+    });
+  } else {
+    res.send("not ok");
+  }
 
 });
+
+router.post("/userModule/delFriend", jsonParser, (req, res) => {
+  const index = users.map((g) => {
+    return g.id;
+  }).indexOf(req.body.id);
+
+  if (index !== -1) {
+    const indexfriend = users[index].friends.indexOf(req.body.friend);
+    if (indexfriend > -1)
+      users[index].friends.splice(indexfriend, 1);
+
+    fs.writeFile('data.json', JSON.stringify(users), (err) => {
+      if (err) {
+        throw err;
+        res.send(false)
+      } else {
+        console.log('The file has been saved!');
+        res.send(true)
+      }
+    });
+  } else {
+    res.send("not ok");
+  }
+});
+
+router.post("/userModule/addFriend", jsonParser, (req, res) => {
+  const index = users.map((g) => {
+    return g.id;
+  }).indexOf(req.body.id);
+
+  if (index !== -1) {
+    users[index].friends.push(req.body.friend);
+
+    fs.writeFile('data.json', JSON.stringify(users), (err) => {
+      if (err) {
+        throw err;
+        res.send(false)
+      } else {
+        console.log('The file has been saved!');
+        res.send(true)
+      }
+    });
+  } else {
+    res.send("not ok");
+  }
+});
+
+
 module.exports = router;
